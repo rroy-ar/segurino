@@ -16,6 +16,7 @@ Originally developed as a college project for the **"Arquitectura de las Computa
 - [Communication Protocols & Database Schema](#communication-protocols--database-schema)
 - [Setup & Installation](#setup--installation)
 - [Running Tests](#running-tests)
+- [Known Issues & Limitations](#known-issues--limitations)
 
 ---
 
@@ -263,3 +264,15 @@ The Node.js alert daemon includes unit tests using Node's built-in test runner (
 cd daemon
 npm test
 ```
+
+---
+
+## Known Issues & Limitations
+
+### Direct 5V ↔ 3.3V UART Connection (Prototype Wiring)
+
+- **Problem:** The **Arduino UNO** uses **5V** TTL logic, whereas the **ESP32** uses **3.3V** logic (and its GPIO pins are not 5V-tolerant). In the original prototype hardware build, the UART lines (`TX` ↔ `RX`) were connected directly without level shifting. Since this was built for a short college demonstration, our instructor advised that running it briefly a few times would be acceptable, so it was kept wired directly during the project demo.
+- **Solution Before Permanent Installation:** Driving 5V continuously into an ESP32 GPIO pin can degrade or permanently damage the microcontroller over time. Before deploying Segurino permanently (24/7), step down the **Arduino UNO `TX (D1)` → ESP32 `RX2 (GPIO16)`** line using one of the following:
+  - **Resistive Voltage Divider (Recommended simple fix):** Connect a **1 kΩ** resistor in series from Arduino `TX (D1)` to ESP32 `RX2 (GPIO16)`, and a **2 kΩ** resistor from ESP32 `RX2 (GPIO16)` to `GND` (`5V × 2 kΩ / (1 kΩ + 2 kΩ) ≈ 3.33V`).
+  - **Bidirectional Logic-Level Shifter:** Use a 3.3V ↔ 5V MOSFET-based level-shifter module on the UART lines.
+  - *(Note: ESP32 `TX2` at 3.3V → Arduino `RX` does not require stepping up, as 3.3V is above the ATmega328P's `3.0V` logic `HIGH` threshold.)*
