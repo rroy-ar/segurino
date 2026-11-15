@@ -1,0 +1,26 @@
+{
+  "rules": {
+    "systemStatus": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "status": {
+        ".validate": "newData.isString() && (newData.val() === 'ARMED' || newData.val() === 'DISARMED')"
+      }
+    },
+    "pins": {
+      ".read": "auth != null",
+      "$pinId": {
+        ".write": "auth != null && (!data.exists() || data.child('owner').val() === auth.uid)",
+        ".validate": "newData.hasChildren(['value', 'owner']) && newData.child('value').isString() && newData.child('value').val().matches(/^[0-9]{4,8}$/) && newData.child('owner').isString()"
+      }
+    },
+    "events": {
+      ".read": "auth != null",
+      ".indexOn": ["epoch", "timestamp"],
+      "$eventId": {
+        ".write": "auth != null && !data.exists()",
+        ".validate": "newData.hasChildren(['type', 'timestamp']) && newData.child('type').isString() && newData.child('timestamp').isString()"
+      }
+    }
+  }
+}

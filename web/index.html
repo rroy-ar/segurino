@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Segurino — Alarm Control Panel</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <!-- Setup Warning Banner (shown only if firebase-config.js is missing) -->
+    <div id="config-warning" class="panel warning-panel hidden" role="alert">
+      <h1>Configuration Required</h1>
+      <p>
+        Firebase configuration was not found. Copy
+        <code>web/js/firebase-config.example.js</code> to
+        <code>web/js/firebase-config.js</code> and add your Firebase project credentials.
+      </p>
+    </div>
+
+    <!-- Authentication View -->
+    <section id="login-view" class="panel">
+      <div class="brand-header">
+        <span class="brand-badge">Segurino IoT</span>
+        <h1>Sign In</h1>
+        <p class="subtitle">Access your home alarm dashboard</p>
+      </div>
+
+      <form id="auth-form" novalidate>
+        <div class="form-group">
+          <label for="login-email">Email Address</label>
+          <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email" required />
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="Minimum 6 characters" autocomplete="current-password" required />
+        </div>
+        <div id="error-message" class="error-text" role="alert"></div>
+        <div class="button-row">
+          <button type="submit" id="btn-login" class="btn btn-primary">Sign In</button>
+          <button type="button" id="btn-register" class="btn btn-secondary">Register</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Main Dashboard View -->
+    <section id="main-content" class="panel hidden">
+      <header class="user-bar">
+        <span id="user-email" class="user-email"></span>
+        <div class="user-actions">
+          <button type="button" id="btn-toggle-sound" class="btn btn-chip" title="Toggle browser intrusion alert sound">
+            Sound: On
+          </button>
+          <button type="button" id="btn-logout" class="btn btn-chip btn-muted">Sign Out</button>
+        </div>
+      </header>
+
+      <h1>Alarm Control Panel</h1>
+
+      <div id="status-display" class="status-banner status-loading">Connecting...</div>
+
+      <div class="button-row">
+        <button type="button" id="btn-arm" class="btn btn-arm">Arm System</button>
+        <button type="button" id="btn-disarm" class="btn btn-disarm">Disarm System</button>
+      </div>
+
+      <!-- PIN Management -->
+      <section class="section">
+        <h2>My Keypad PINs</h2>
+        <form id="pin-form" class="pin-form" novalidate>
+          <input
+            type="text"
+            id="new-pin-input"
+            inputmode="numeric"
+            maxlength="8"
+            placeholder="4–8 digit PIN"
+            aria-label="New keypad PIN"
+          />
+          <input
+            type="text"
+            id="new-pin-label"
+            maxlength="24"
+            placeholder="Label (optional)"
+            aria-label="PIN label"
+          />
+          <button type="submit" id="btn-add-pin" class="btn btn-primary">Add</button>
+        </form>
+        <p id="pin-feedback" class="feedback-text" aria-live="polite"></p>
+        <ul id="pins-list" class="item-list"></ul>
+      </section>
+
+      <!-- Event Log -->
+      <section class="section">
+        <h2>Intrusion Event Log</h2>
+        <div id="events-list-container" class="events-scroll">
+          <ul id="events-list" class="item-list"></ul>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Firebase v8 SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+  <!-- Project Configuration (user-created from firebase-config.example.js) -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

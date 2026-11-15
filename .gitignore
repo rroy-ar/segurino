@@ -1,0 +1,27 @@
+# Secrets & environment configuration
+.env
+daemon/.env
+daemon/serviceAccountKey.json
+firmware/esp32/segurino_esp32/config.h
+web/js/firebase-config.js
+
+# Draft notes containing original hardcoded credentials
+code.txt
+
+# Node.js
+node_modules/
+daemon/node_modules/
+npm-debug.log*
+
+# Arduino / PlatformIO build artifacts
+*.elf
+*.bin
+*.hex
+.pio/
+build/
+
+# OS & editor files
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
