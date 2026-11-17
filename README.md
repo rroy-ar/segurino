@@ -1,6 +1,5 @@
 
 
-https://github.com/user-attachments/assets/72da4faa-4fc5-4e5d-a29e-1ce3a30f0016
 
 # Segurino — IoT Home Alarm System
 
@@ -58,9 +57,7 @@ flowchart LR
 
 ### Hardware Prototype Demo (Video)
 
-<video src="media/WorkingVideo.mp4" controls width="520">
-  Your browser/viewer does not support embedded video playback.
-</video>
+https://github.com/user-attachments/assets/72da4faa-4fc5-4e5d-a29e-1ce3a30f0016
 
 - **Direct link:** [Watch the Hardware Demo Video (`media/WorkingVideo.mp4`)](media/WorkingVideo.mp4) — demonstrates the 3D-printed enclosure, 16×2 LCD, 4×4 keypad, status LEDs, and PIR motion sensor.
 
