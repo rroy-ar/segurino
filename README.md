@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/72da4faa-4fc5-4e5d-a29e-1ce3a30f0016
+
 # Segurino — IoT Home Alarm System
 
 **Segurino** is a full-stack IoT home security alarm system built around an **Arduino UNO**, an **ESP32**, **Firebase Realtime Database**, a **real-time Web Control Dashboard**, and a **self-hosted Node.js email alert daemon** running on a repurposed **Samsung Galaxy J4** home server (via Termux).
